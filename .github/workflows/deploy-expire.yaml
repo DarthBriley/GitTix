@@ -1,0 +1,22 @@
+name: deploy-expire
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'expire/**'
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd expire && docker build -t 19daveb68/expire .
+      - run: docker login -u ${{ secrets.DOCKER_ID }} -p ${{ secrets.DOCKER_PW }}
+      - run: docker push 19daveb68/expire
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_API_KEY }}
+      - run: doctl kubernetes cluster kubeconfig save gittix-db1
+      - run: kubectl rollout restart deployment expire-depl
