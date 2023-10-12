@@ -1,11 +1,11 @@
-ordersauth
+name: deploy-orders
 
 on:
   push:
     branches:
       - master
     paths:
-      - 'auth/**'
+      - 'orders/**'
       
 jobs:
   build:
