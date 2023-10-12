@@ -1,0 +1,20 @@
+name: deploy-auth
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'auth/**'
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd auth && docker build -t 19daveb68/auth .
+      - run: docker login -u $DOCKER_ID -p $DOCKER_PW
+        env:
+          DOCKER_ID: ${{ secrets.DOCKER_ID }}
+          DOCKER_PW: ${{ secrets.DOCKER_PW }}
+      -run: docker push 19daveb68/auth
