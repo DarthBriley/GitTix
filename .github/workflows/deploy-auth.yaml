@@ -15,3 +15,8 @@ jobs:
       - run: cd auth && docker build -t 19daveb68/auth .
       - run: docker login -u ${{ secrets.DOCKER_ID }} -p ${{ secrets.DOCKER_PW }}
       - run: docker push 19daveb68/auth
+      - uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DO_API_KEY }}
+      - run: doctl kubernetes cluster kubeconfig save gittix-db1
+      - run: kubectl rollout restart deployment auth-depl
