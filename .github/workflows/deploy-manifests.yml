@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-    paths: infraauth/**'
+    paths: infra/**'
       
 jobs:
   build:
@@ -15,4 +15,4 @@ jobs:
         with:
           token: ${{ secrets.DO_API_KEY }}
       - run: doctl kubernetes cluster kubeconfig save gittix-db1
-      - run: kubectl apply -f infra/k8s && kubectl apply -f infra/k8s-prod
+      - run: kubectl apply -f infra/k8s && kubectl apply -f infra/k8s-dev
