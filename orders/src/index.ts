@@ -7,7 +7,7 @@ import { ExpireCompletedListener } from './events/listeners/expire-completed-lis
 import { PaymentCreatedListener } from './events/listeners/payment-created-listener';
 
 const start = async () => {
-  console.log('Starting up orders-service ...');
+  console.log('Starting up orders service ...');
   if (!process.env.JWT_KEY) {
     throw new Error('Must have JWT_KEY defined');
   }
