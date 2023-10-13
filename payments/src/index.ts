@@ -5,7 +5,7 @@ import { OrderCancelledListener } from './events/listeners/order-cancelled-liste
 import { OrderCreatedListener } from './events/listeners/order-create-listener';
 
 const start = async () => {
-  console.log('Starting up payments service ...');
+  console.log('Starting up payments-service ...');
   if (!process.env.JWT_KEY) {
     throw new Error('Must have JWT_KEY defined');
   }
@@ -44,7 +44,7 @@ const start = async () => {
   }
 
   app.listen(3000, () => {
-    console.log('Payments service is listening on port 3000');
+    console.log('Payments service is listening on port:3000');
   });
 };
 
